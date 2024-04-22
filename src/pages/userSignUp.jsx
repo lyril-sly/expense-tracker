@@ -22,7 +22,7 @@ export default function SignUp(){
     return(
         <>
         <div className=" bg-sky-800 p-20">
-            <Navbar/>
+            {/* <Navbar/> */}
         <div className="shadow-lg grid grid-cols-1 md:grid-cols-2 p-10 gap-20 bg-cyan-950 backdrop-filter backdrop-blur-lg bg-opacity-30">
     <div className=''>
         {/* <h1 className='text-center text-4xl font-bold text-gray-300 mt-20'>Don't be a victim</h1>
@@ -33,7 +33,7 @@ export default function SignUp(){
     </div>
     <div>
         <div className="grid grid-cols-1 md:grid-cols-2 mt-20">
-            <h1 className='text-2xl font-bold p-2 text-gray-100 '>Sign Up</h1>
+            <h1 className='text-2xl font-bold  text-gray-100 '>Sign Up</h1>
             <p className='text-gray-400'>Already have an account?<Link to="/log-in" className='text-cyan-300 font-bold '> Log In</Link> </p>
         </div>
         <form className="grid grid-rows-2 md:grid-rows-6">

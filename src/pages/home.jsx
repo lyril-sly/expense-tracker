@@ -5,18 +5,18 @@ import Navbar from "../component/navbar";
 
 export const Home = () => {
   return (
-    <div className="bg-sky-800 p-20 h-full">
+    <div className="bg-sky-800 p-10 h-full">
       <Navbar />
       <marquee
         className="text-6xl text-cyan-400"
         behavior="crow"
         direction="left "
       >
-        Welcome to Spend Wise
+        Welcome to Spend Wise!
       </marquee>
       <div className="grid grid-cols-1 md:grid-cols-2 mt-20 gap-20 ">
-        <div className="p-5">
-          <div className="shadow-lg grid grid-cols-1 md:grid-cols-1 bg-cyan-950 backdrop-filter backdrop-blur-lg bg-opacity-30 gap-5 mt-10 mb-5 w-60">
+        <div className="p-2 gap-10 grid grid-cols-1 md:grid-cols-2">
+          <div className="shadow-lg grid grid-cols-1 md:grid-cols-1 bg-cyan-950 backdrop-filter backdrop-blur-lg bg-opacity-30 gap-5 mt-10 mb-5 ">
             <h1 className="text-center text-sky-100 text-2xl bg-cyan-400 rounded">
               Budget
             </h1>
@@ -33,7 +33,7 @@ export const Home = () => {
               <Link>Click</Link>
             </button>
           </div>
-          <div className="shadow-lg grid grid-cols-1 md:grid-cols-1  bg-cyan-950 backdrop-filter backdrop-blur-lg bg-opacity-30 gap-5 mt-10 mb-5 w-60">
+          <div className="shadow-lg grid grid-cols-1 md:grid-cols-1  bg-cyan-950 backdrop-filter backdrop-blur-lg bg-opacity-30 gap-5 mt-10 mb-5 ">
             <h1 className="text-center text-gray-100 text-2xl bg-cyan-400 rounded">
               Transaction
             </h1>
@@ -48,7 +48,7 @@ export const Home = () => {
               <Link>Click</Link>
             </button>
           </div>
-          <div className="shadow-lg grid grid-cols-1 md:grid-cols-1 bg-cyan-950 backdrop-filter backdrop-blur-lg bg-opacity-30 gap-5 mt-10 mb-5 w-60">
+          <div className="shadow-lg grid grid-cols-1 md:grid-cols-1 bg-cyan-950 backdrop-filter backdrop-blur-lg bg-opacity-30 gap-5 mt-10 mb-5 ">
             <h1 className="text-center text-gray-100 text-2xl bg-cyan-400 rounded">
               Money
             </h1>

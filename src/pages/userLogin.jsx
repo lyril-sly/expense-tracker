@@ -22,7 +22,7 @@ export default function LogIn(){
     return(
         <>
         <div className=" bg-sky-800  p-20">
-        <Navbar/>
+        {/* <Navbar/> */}
        
         <div className="shadow-lg  px-20 backdrop-filter bg-cyan-950 backdrop-blur-lg bg-opacity-30">
             
@@ -34,7 +34,7 @@ export default function LogIn(){
         <form className="grid grid-rows-2 md:grid-rows-6 justify-center gap-5 ">
         <div className="">
         <h1 className="font-bold text-4xl text-gray-200">Hello Again</h1>
-            <p className="text-2xl text-cyan-300 py-5">Log In</p>
+            <p className="text-2xl text-cyan-300 ">Log In</p>
             </div>
             <input 
             type="text"
