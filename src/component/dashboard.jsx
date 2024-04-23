@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Dashboard = () => {
+export const Dash= () => {
   return (
     <div className='flex flex-col py-12 px-14'>
         <h2>Dashbord</h2>

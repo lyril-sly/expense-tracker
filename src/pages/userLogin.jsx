@@ -10,7 +10,7 @@ export default function LogIn(){
     const [Password, setPassword] = useState("")
 
     const logUser = () => {
-        axios.post('url', {
+        axios.post('http://localhost:6000/api/users/login', {
 
         }).then((res) => {
             setEmail(res.body)
@@ -19,6 +19,7 @@ export default function LogIn(){
 
         })
     }
+
     return(
         <>
         <div className=" bg-sky-800  p-20">

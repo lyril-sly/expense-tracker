@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../component/navbar';
 import side2 from '../asset/image5.png'
+import axios from 'axios';
 
 const DailyBudget = () => {
   const [budgets, setBudget] = useState([]);
@@ -17,6 +18,24 @@ const DailyBudget = () => {
       return;
     }
     const newBudget = { title, description, amount: parseFloat(amount) };
+    // Post budget to API
+    const saveBudgets = async (e) => {
+      try {
+        const data = await axios.post("http://localhost:6000/api/budgets", {
+          method: "POST",
+          body: JSON.stringify({
+            title: title,
+            description: description,
+            amount: amount,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+      } catch (error) {
+        
+      }
+    }
     setBudget([...budgets, newBudget]);
     setTitle('');
     setDescription('')
@@ -24,6 +43,15 @@ const DailyBudget = () => {
     setAmount("");
   };
 
+  const getBudget = async () => {
+    const data = await axios.get("url", {
+      method: "GET"
+    })
+  }
+  
+  const deleteBudget = async (budget) => {
+    const response = await axios.delete("url", budget._id);
+  };
   // const totalExpenses = expenses.reduce((acc, expense) => acc + expense.amount, 0);
   // const remainingBudget = dailyBudget - totalExpenses;
 
@@ -73,6 +101,7 @@ const DailyBudget = () => {
         </div>
       </div>
       <button type='submit' className="bg-gradient-to-r from-purple-500 to-sky-400 text-center w-40 font-bold text-gray-200 p-2 rounded-2xl mt-5 ">Add Expense</button>
+      <button onClick={() => deleteBudget()}>delete</button>
       <div className="mt-4">
         <h2 className="text-lg font-semibold text-cyan-400 mb-4">My Budget</h2>
         <ul className='text-gray-300'>

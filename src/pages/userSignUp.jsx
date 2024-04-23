@@ -1,7 +1,6 @@
 import axios from 'axios'
 import money from '../asset/image6.png'
-import Navbar from '../component/navbar'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
 
@@ -9,19 +8,36 @@ import { useState } from 'react'
 export default function SignUp(){
     const [email, setEmail] = useState('')
     const [userName, setUserName] = useState('')
-    const [Password, setPassword] = useState('')
-    const getUser = () => {
-        axios.post('url', {
-
+    const [Password, setPassword] = useState('');
+    const navigate = useNavigate()
+    const addUser = (e) => {
+        e.preventDefault();
+        const userData = {
+            email: email,
+            username: userName,
+            password: Password
+        }
+        const url = 'http://localhost:6000/api/users/register'
+        console.log(userData)
+       const data = axios.post(url, {
+        body: userData
         }).then((res) => {
-            setEmail(res.body)
-            setUserName(res.body)
-            setPassword(res.body)
+            navigate("/");
+            console.log(res);
+            setEmail("")
+            setUserName("")
+            setPassword("")
         })
     }
+
+    const getUser = async () => {
+        const data = await axios.get("http://localhost:6000/api/users/me", )
+    }
+
+   
     return(
         <>
-        <div className=" bg-sky-800 p-20">
+        <div className=" bg-sky-800 p-20 ">
             {/* <Navbar/> */}
         <div className="shadow-lg grid grid-cols-1 md:grid-cols-2 p-10 gap-20 bg-cyan-950 backdrop-filter backdrop-blur-lg bg-opacity-30">
     <div className=''>
@@ -36,15 +52,15 @@ export default function SignUp(){
             <h1 className='text-2xl font-bold  text-gray-100 '>Sign Up</h1>
             <p className='text-gray-400'>Already have an account?<Link to="/log-in" className='text-cyan-300 font-bold '> Log In</Link> </p>
         </div>
-        <form className="grid grid-rows-2 md:grid-rows-6">
+        <form onSubmit={addUser} className="grid grid-rows-2 md:grid-rows-6">
             <label htmlFor=""  className='text-cyan-400'>User Name</label>
-            <input className="rounded-2xl w-96 h-10 bg-gray-400" 
+            <input className="rounded-2xl w-96 h-10 bg-gray-400 text-center" 
             type="text"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
             placeholder="Your Name" />
             <label htmlFor="" className='text-cyan-400'>Email</label>
-            <input className="rounded-2xl w-96 h-10 bg-gray-400 text-gray-200 border-none" 
+            <input className="rounded-2xl w-96 h-10 bg-gray-400 text-gray-200 border-none text-center" 
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -59,7 +75,7 @@ export default function SignUp(){
                 <input type="checkbox" />
                 <p className='text-gray-300'>I agree to the <span className="text-sky-300">Platform's Terms of Service</span> and <span className='text-sky-300'>Privacy Policies</span></p>
             </div>
-            <button className="bg-gradient-to-r from-purple-500 to-sky-400 text-center w-40 font-bold text-white p-2 rounded-2xl mt-5"><Link to="/home" onClick={getUser()}>Create account</Link></button>
+            <button type='submit' className="bg-gradient-to-r from-purple-500 to-sky-400 text-center w-40 font-bold text-white p-2 rounded-2xl mt-5">Create account</button>
         </form>
     </div>
 </div>
