@@ -10,29 +10,32 @@ export default function SignUp(){
     const [userName, setUserName] = useState('')
     const [Password, setPassword] = useState('');
     const navigate = useNavigate()
-    const addUser = (e) => {
+
+
+    const addUser = async(e) => {
         e.preventDefault();
         const userData = {
             email: email,
             username: userName,
             password: Password
         }
-        const url = 'http://localhost:6000/api/users/register'
+        const api = 'http://localhost:7080'
+        const url = (`${api}/api/users/register`)
         console.log(userData)
-       const data = axios.post(url, {
-        body: userData
-        }).then((res) => {
-            navigate("/");
-            console.log(res);
+        
+
+
+       const data =await axios.post(url,userData)
+
+       const response = await data.data
+       navigate("/home");
             setEmail("")
             setUserName("")
             setPassword("")
-        })
+       
+        
     }
 
-    const getUser = async () => {
-        const data = await axios.get("http://localhost:6000/api/users/me", )
-    }
 
    
     return(
@@ -54,13 +57,13 @@ export default function SignUp(){
         </div>
         <form onSubmit={addUser} className="grid grid-rows-2 md:grid-rows-6">
             <label htmlFor=""  className='text-cyan-400'>User Name</label>
-            <input className="rounded-2xl w-96 h-10 bg-gray-400 text-center" 
+            <input className="rounded-2xl w-96 h-10 bg-gray-400" 
             type="text"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
             placeholder="Your Name" />
             <label htmlFor="" className='text-cyan-400'>Email</label>
-            <input className="rounded-2xl w-96 h-10 bg-gray-400 text-gray-200 border-none text-center" 
+            <input className="rounded-2xl w-96 h-10 bg-gray-400 text-gray-200 border-none " 
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}

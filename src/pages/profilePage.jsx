@@ -1,20 +1,31 @@
 import { useState } from "react";
 import Navbar from "../component/navbar";
 import Avatar from "react-avatar";
+import axios from "axios";
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
   const [user, setUser] = useState({
     name: "jane Akoto",
     email: "johndoe@example.com",
     password: "helloworld", 
   });
 
-  const handleChange = (e) => {
+  const [email, setEmail] = useState('')
+
+  const handleChange = async (e) => {
     setUser({
       ...user,
       [e.target.name]: e.target.value,
     });
   };
+
+  const api = 'http://localhost:7080'
+  const url =  (`${api}/api/users/me`)
+
+  const data = await axios.get(url, setUser)
+  const response = await data.data
+  setUser('')
+  setEmail('')
 
   return (
     <>

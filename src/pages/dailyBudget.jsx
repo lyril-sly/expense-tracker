@@ -10,48 +10,73 @@ const DailyBudget = () => {
   const [description, setDescription] = useState('')
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState('')
-  const handleAddBudget = (e) => {
+
+
+
+  const handleAddBudget = async (e) => {
     e.preventDefault()
-    if (!title || !description 
-    || !amount) {
-      alert ('all fill are required');
-      return;
-    }
-    const newBudget = { title, description, amount: parseFloat(amount) };
-    // Post budget to API
-    const saveBudgets = async (e) => {
-      try {
-        const data = await axios.post("http://localhost:6000/api/budgets", {
-          method: "POST",
-          body: JSON.stringify({
-            title: title,
-            description: description,
-            amount: amount,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-      } catch (error) {
-        
+    // if (!title || !description 
+    // || !amount) {
+    //   alert ('all fill are required');
+    //   return;
+    // }
+    const newBudget = {date, title, description, amount: parseFloat(amount) };
+
+      const budgetData = {
+        title: title,
+        description: description,
+        amount: amount
       }
-    }
+      
+      const api = 'http://localhost:7080'
+      const url = (`${api}/api/budgets`)
+        
+
+      const data = await fetch(url,budgetData)
+
+      const response = await data.data
+      console.log(data.data);
     setBudget([...budgets, newBudget]);
     setTitle('');
     setDescription('')
     setDate('')
     setAmount("");
   };
-
-  const getBudget = async () => {
-    const data = await axios.get("url", {
-      method: "GET"
-    })
-  }
+console.log(budgets);
+  // const getBudget = async () => {
+  //   const data = await axios.get("url", {
+  //     method: "GET"
+  //   })
+  // }
   
-  const deleteBudget = async (budget) => {
-    const response = await axios.delete("url", budget._id);
-  };
+  const api = 'http://localhost:7080'
+  
+  const deleteBudget = async (budgetToDelete) => {
+    console.log("delete response:", budgetToDelete);
+    const response = await fetch(`${api}/api/budgets/${budgetToDelete._id}`, {
+        method: "DELETE"
+    });
+    const data = await response.json();
+    console.log(data);
+
+    // Remove the deleted budget from the budgets array
+    setBudget(budgets.filter(budget => budget !== budgetToDelete));
+};
+
+const calculateTotalBudget = () => {
+  return budgets.reduce((total, budget) => total + budget.amount, 0)
+}
+
+  
+  // const deleteBudget = async (budget) => {
+  //   console.log("delete response:", budget, );
+  //   const response = await fetch(`${api}/api/budgets/${ budget._id}`,{
+  //     method: "DELETE"
+  //   });
+  //   const data = response.data
+  //   return data
+    
+  // };
   // const totalExpenses = expenses.reduce((acc, expense) => acc + expense.amount, 0);
   // const remainingBudget = dailyBudget - totalExpenses;
 
@@ -100,15 +125,25 @@ const DailyBudget = () => {
           />
         </div>
       </div>
-      <button type='submit' className="bg-gradient-to-r from-purple-500 to-sky-400 text-center w-40 font-bold text-gray-200 p-2 rounded-2xl mt-5 ">Add Expense</button>
-      <button onClick={() => deleteBudget()}>delete</button>
+      <button type='submit' className="bg-gradient-to-r from-purple-500 to-sky-400 text-center w-40 font-bold text-gray-200 p-2 rounded-2xl mt-5 ">Add Budget</button>
+      
       <div className="mt-4">
         <h2 className="text-lg font-semibold text-cyan-400 mb-4">My Budget</h2>
-        <ul className='text-gray-300'>
-          {budgets.map((budget, index) => (
-            <li key={index}><strong>{budget.title}</strong> - {budget.description} - ${budget.amount}</li>
-          ))}
-        </ul>
+        <table className="text-gray-300">
+
+        <tbody className=''>
+                  {budgets.map((budget, index) => (
+                    <tr key={index}>
+                      <td>{budget.title}</td>
+                      <td className='px-5'>{budget.description}</td>
+                      <td>GH{budget.amount}</td>
+                      <td className='px-5'>{budget.date}</td>
+                      <td><button className='bg-red-600 ml-5 rounded px-2 text-white' onClick={() => deleteBudget(budget)}>delete</button></td>
+                    </tr>
+                  ))}
+                </tbody>
+                </table>
+        
       </div>
       {/* <div className="">
         <h2 className="text-lg font-semibold mb-2 text-gray-200">Budget Summary</h2>
@@ -116,11 +151,14 @@ const DailyBudget = () => {
         <p className='text-gray-200'>Remaining Budget: ${remainingBudget.toFixed(2)}</p>
       </div> */}
         
-        
-    
+
         </form>
        
       </div>
+      <div className="mt-4">
+          <h2 className="text-lg font-semibold text-cyan-400 mb-4">Total Budget</h2>
+          <p className='text-blue-200'>Total: GH  { calculateTotalBudget()}</p>
+        </div>
       
      </div>
      </div>

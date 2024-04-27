@@ -10,7 +10,7 @@ export default function LogIn(){
     const [Password, setPassword] = useState("")
 
     const logUser = () => {
-        axios.post('http://localhost:6000/api/users/login', {
+        axios.post(process.env.EXPRESS_API, {
 
         }).then((res) => {
             setEmail(res.body)

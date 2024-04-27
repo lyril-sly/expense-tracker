@@ -72,6 +72,7 @@ import { useState } from "react";
 import Chart from "../component/chart1.jsx";
 import { Dash } from "../component/dashboard";
 
+
 export default function Nav() {
   const [active, setActive] = useState(0);
 
@@ -127,11 +128,7 @@ export default function Nav() {
           ))}
 
 
-          {/* {navLink.map((item, index) => <div  key = {index} className={'flex space-x-3' + {active === index ? "bg-(#FFBC8C) text-white font-semibold"}}
-        onClick ={() => setActive(index)}
-        >
-            <item.icon/>
-            <span>{item.name}</span></div>) */}
+          
         </div>
       </div>
       </div>
@@ -143,6 +140,7 @@ export default function Nav() {
       {/* <Dash/> */}
       </div>
       </div>
+      
     </>
   );
 }

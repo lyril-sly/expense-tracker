@@ -17,11 +17,18 @@ export default function Hero(){
                 <h1 className="text-4xl font-bold py-5 text-white">Do you want Change in the way you manage your financial stuff?</h1>
                 <p className="text-sky-400">Spend Wise help you automate your financial activities start from Saving, Expenses and Budgeting in an easy and different way than ever! </p>
                 <button className="bg-gradient-to-r from-purple-500 to-sky-400 text-center justify-center font-bold text-white font-bold p-3 rounded-2xl mt-5"><Link to="/sign-up ">Get Started →</Link></button>
+                <div className="flex text-red-400 gap-5 py-10">
+                <h3 className="text-2xl animate-bounce h-6">Money</h3>
+                <h3 className="text-2xl animate-bounce  h-6">Power</h3>
+                <h3 className="text-2xl animate-bounce  h-6">Respect</h3>
             </div>
+            </div>
+           
             <div>
                 <img src={hp} alt="" />
             </div>
             </div>
+            
         </div>
 
         {/* <section className="hero-container">
